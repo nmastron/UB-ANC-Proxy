@@ -22,8 +22,6 @@ protected slots:
     void readPendingDatagrams();
 
 private:
-    QByteArray m_data;
-
     UBServer* m_server;
     QUdpSocket* m_socket;
 };
