@@ -24,11 +24,15 @@ void UBProxy::netDataReadyEvent(QByteArray stream) {
 }
 
 void UBProxy::readPendingDatagrams() {
+    QByteArray stream;
+
     while (m_socket->hasPendingDatagrams()) {
         QByteArray datagram;
         datagram.resize(m_socket->pendingDatagramSize());
         m_socket->readDatagram(datagram.data(), datagram.size());
 
-        m_server->sendData(datagram);
+        stream += datagram;
     }
+
+    m_server->sendData(stream);
 }
