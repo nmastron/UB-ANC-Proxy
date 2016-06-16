@@ -3,7 +3,7 @@ QT -= gui
 
 CONFIG += c++11
 
-TARGET = UB-ANC-Proxy
+TARGET = ub-anc-pxy
 CONFIG += console
 CONFIG -= app_bundle
 
