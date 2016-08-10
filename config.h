@@ -4,11 +4,12 @@
 #define COMM_RANGE 50
 #define VISUAL_RANGE 10
 
-#define MAV_PORT 5760
-#define NET_PORT 6760
-#define SNR_PORT 7760
+#define MAV_PORT  5760
+#define NET_PORT 15760
+#define SNR_PORT 25760
+#define PWR_PORT 35760
 
-#define PXY_PORT 8760
+#define PXY_PORT 45760
 
 #define AGENT_FILE "./agent"
 #define FIRMWARE_FILE "./firmware"
