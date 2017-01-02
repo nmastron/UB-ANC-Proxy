@@ -19,8 +19,25 @@ UBProxy::UBProxy(QObject *parent) : QObject(parent)
 }
 
 void UBProxy::netDataReadyEvent(QByteArray stream) {
+    static QByteArray data;
+
+    data += stream;
+
+    while (data.contains(PACKET_END)) {
+        int bytes = data.indexOf(PACKET_END);
+
+        UBNetPacket packet;
+        packet.depacketize(data.left(bytes));
+
+        QByteArray pkt = packet.packetize().append(PACKET_END);
+
+        m_socket->writeDatagram(pkt.data(), pkt.size(), QHostAddress(tr("192.168.1.%1").arg(packet.getDesID())), PXY_PORT);
+
+        data = data.mid(bytes + qstrlen(PACKET_END));
+    }
+
 //    m_socket->writeDatagram(stream.data(), stream.size(), QHostAddress::Broadcast, PXY_PORT);
-    m_socket->writeDatagram(stream.data(), stream.size(), QHostAddress(tr("192.168.1.%1").arg(255)), PXY_PORT);
+//    m_socket->writeDatagram(stream.data(), stream.size(), QHostAddress(tr("192.168.1.%1").arg(255)), PXY_PORT);
 }
 
 void UBProxy::readPendingDatagrams() {
