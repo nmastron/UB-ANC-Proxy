@@ -9,7 +9,7 @@
 UBProxy::UBProxy(QObject *parent) : QObject(parent)
 {
     m_server = new UBServer(this);
-    m_server->startServer(NET_PORT);
+    m_server->startServer(PHY_PORT);
 
     connect(m_server, SIGNAL(dataReady(QByteArray)), this, SLOT(netDataReadyEvent(QByteArray)));
 
