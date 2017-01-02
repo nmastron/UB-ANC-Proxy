@@ -11,9 +11,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     UBProxy.cpp \
-    UBServer.cpp
+    UBServer.cpp \
+    UBNetPacket.cpp \
 
 HEADERS += \
     UBProxy.h \
     UBServer.h \
-    config.h
+    UBNetPacket.h \
+    config.h \
