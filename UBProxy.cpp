@@ -1,5 +1,6 @@
 #include "UBProxy.h"
 #include "UBServer.h"
+#include "UBNetPacket.h"
 
 #include "config.h"
 
