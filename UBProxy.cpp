@@ -14,7 +14,8 @@ UBProxy::UBProxy(QObject *parent) : QObject(parent)
     connect(m_server, SIGNAL(dataReady(QByteArray)), this, SLOT(netDataReadyEvent(QByteArray)));
 
     m_socket = new QUdpSocket(this);
-    m_socket->bind(PXY_PORT, QUdpSocket::ShareAddress);
+    m_socket->bind(QHostAddress::AnyIPv4, PXY_PORT, QUdpSocket::ShareAddress);
+//    m_socket->joinMulticastGroup(QHostAddress(tr("192.168.1.255")));
 
     connect(m_socket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
 }
@@ -38,7 +39,7 @@ void UBProxy::netDataReadyEvent(QByteArray stream) {
     }
 
 //    m_socket->writeDatagram(stream.data(), stream.size(), QHostAddress::Broadcast, PXY_PORT);
-//    m_socket->writeDatagram(stream.data(), stream.size(), QHostAddress(tr("192.168.1.%1").arg(255)), PXY_PORT);
+//    m_socket->writeDatagram(stream.data(), stream.size(), QHostAddress(tr("192.168.1.255")), PXY_PORT);
 }
 
 void UBProxy::readPendingDatagrams() {
